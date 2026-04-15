@@ -26,4 +26,12 @@ public class GreetingService {
     public List<Greeting> getAll() {
         return repo.findAll();
     }
+    public Greeting update(Long id, String message) {
+        Greeting g = repo.findById(id).orElse(null);
+        if (g != null) {
+            g.setMessage(message);
+            return repo.save(g);
+        }
+        return null;
+    }
 }
