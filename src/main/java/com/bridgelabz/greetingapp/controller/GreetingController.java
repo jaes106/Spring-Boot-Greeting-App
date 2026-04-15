@@ -15,4 +15,21 @@ public class GreetingController {
     public String getGreeting() {
         return service.getSimpleGreeting();
     }
+
+    @GetMapping("/custom")
+    public String getCustomGreeting(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName) {
+
+        if (firstName != null && lastName != null)
+            return "Hello " + firstName + " " + lastName;
+
+        if (firstName != null)
+            return "Hello " + firstName;
+
+        if (lastName != null)
+            return "Hello " + lastName;
+
+        return "Hello World";
+    }
 }
