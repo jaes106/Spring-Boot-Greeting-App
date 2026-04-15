@@ -3,6 +3,7 @@ package com.bridgelabz.greetingapp.controller;
 import com.bridgelabz.greetingapp.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.bridgelabz.greetingapp.model.Greeting;
 
 @RestController
 @RequestMapping("/greeting")
@@ -16,20 +17,8 @@ public class GreetingController {
         return service.getSimpleGreeting();
     }
 
-    @GetMapping("/custom")
-    public String getCustomGreeting(
-            @RequestParam(required = false) String firstName,
-            @RequestParam(required = false) String lastName) {
-
-        if (firstName != null && lastName != null)
-            return "Hello " + firstName + " " + lastName;
-
-        if (firstName != null)
-            return "Hello " + firstName;
-
-        if (lastName != null)
-            return "Hello " + lastName;
-
-        return "Hello World";
+    @PostMapping
+    public Greeting save(@RequestParam String message) {
+        return service.saveGreeting(message);
     }
 }
