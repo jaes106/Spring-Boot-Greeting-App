@@ -34,4 +34,7 @@ public class GreetingService {
         }
         return null;
     }
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
 }
